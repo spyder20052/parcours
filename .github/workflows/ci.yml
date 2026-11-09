@@ -28,8 +28,14 @@ jobs:
       - run: cp .env.example .env.local
       # Stockage S3 local (SeaweedFS) pour les tests qui envoient des fichiers : même service que docker-compose.
       - run: docker compose up -d storage
-      - run: for i in $(seq 1 30); do nc -z localhost 8333 && break; sleep 1; done
-      - run: npm run storage:init
+      # SeaweedFS ouvre le port avant que son API S3 réponde : on réessaie l'init jusqu'à ce qu'elle passe.
+      - name: Préparer le stockage
+        run: |
+          for i in $(seq 1 40); do
+            npm run storage:init && exit 0
+            echo "Stockage pas encore prêt (tentative $i)…" ; sleep 2
+          done
+          echo "Stockage S3 indisponible après attente." >&2 ; exit 1
       - run: node --import tsx scripts/migrate.ts
       - run: npm run typecheck
       - run: npm run lint
