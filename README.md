@@ -95,7 +95,18 @@ Cette commande lance PostgreSQL et le stockage S3 local (SeaweedFS), applique le
 npm run dev
 ```
 
-Ouvre http://localhost:3000, saisis l'adresse de `ADMIN_EMAIL` et demande un lien. Sans clé Resend, le lien de connexion s'affiche dans le terminal et dans `.dev-mail/`.
+### Première connexion
+
+Ouvre http://localhost:3000. **Connecte-toi avec l'adresse exacte que tu as mise dans `ADMIN_EMAIL`** : c'est le premier compte, le seul qui entre sans invitation. Toute autre adresse ne reçoit rien tant qu'elle n'a pas été invitée — la page affiche quand même le message habituel, exprès, pour ne pas révéler qui est invité.
+
+En développement, **aucun e-mail n'est envoyé** (Resend ne sert qu'en production). Le lien de connexion apparaît à deux endroits :
+
+- dans le **terminal** où tourne `npm run dev`, un bloc `[e-mail de développement] … http://localhost:3000/api/auth/magic-link/verify?token=…` ;
+- dans le fichier `.dev-mail/<ton-adresse>.json`.
+
+Ouvre ce lien dans le navigateur pour entrer. Ensuite, depuis **Administration**, invite d'autres adresses : elles se connectent de la même façon (lien dans le terminal en local, vrai e-mail une fois Resend configuré).
+
+> Si tu changes `.env.local`, relance `npm run dev` : les variables d'environnement ne sont lues qu'au démarrage.
 
 ## Personnaliser
 

@@ -17,5 +17,7 @@ export default async function Connexion({ searchParams }: { searchParams: Promis
   const q = await searchParams;
   const email = typeof q.email === "string" ? q.email.slice(0, 254) : "";
   const code = typeof q.erreur === "string" ? q.erreur : typeof q.error === "string" ? "lien" : "";
-  return <LoginForm email={email} error={ERRORS[code] ?? ""} google={!!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)} />;
+  // En développement sans clé Resend, le lien n'est pas envoyé par e-mail mais écrit dans le terminal et .dev-mail/.
+  const devMail = process.env.NODE_ENV !== "production" && !process.env.RESEND_API_KEY;
+  return <LoginForm email={email} error={ERRORS[code] ?? ""} google={!!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET)} devMail={devMail} />;
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { Tower } from "./Onboarding";
 
-export default function LoginForm({ email: initial, error, google }: { email: string; error: string; google: boolean }) {
+export default function LoginForm({ email: initial, error, google, devMail }: { email: string; error: string; google: boolean; devMail: boolean }) {
   const [email, setEmail] = useState(initial);
   const [state, setState] = useState<"idle" | "busy" | "sent">("idle");
   const [err, setErr] = useState(error);
@@ -29,6 +29,7 @@ export default function LoginForm({ email: initial, error, google }: { email: st
         {state === "sent" ? (
           <div className="note-c" role="status">
             <b>Regarde ta boîte de réception.</b> Si {email} a été invitée, un lien de connexion vient de partir. Il reste valable 10 minutes et ne sert qu&apos;une fois.
+            {devMail && <span style={{ display: "block", marginTop: 10 }}>En développement, aucun e-mail n&apos;est envoyé : le lien s&apos;affiche dans le <b>terminal</b> (<code>npm run dev</code>) et dans le dossier <code>.dev-mail/</code>. Seule l&apos;adresse <code>ADMIN_EMAIL</code> ou une adresse invitée en reçoit un.</span>}
             <div className="acts" style={{ marginTop: 10 }}><button className="btn" onClick={() => setState("idle")}>Utiliser une autre adresse</button></div>
           </div>
         ) : (
