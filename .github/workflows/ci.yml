@@ -26,6 +26,10 @@ jobs:
         with: { node-version: 22, cache: npm }
       - run: npm ci
       - run: cp .env.example .env.local
+      # Stockage S3 local (SeaweedFS) pour les tests qui envoient des fichiers : même service que docker-compose.
+      - run: docker compose up -d storage
+      - run: for i in $(seq 1 30); do nc -z localhost 8333 && break; sleep 1; done
+      - run: npm run storage:init
       - run: node --import tsx scripts/migrate.ts
       - run: npm run typecheck
       - run: npm run lint
