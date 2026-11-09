@@ -6,88 +6,587 @@
     "version": 1,
     "appTitle": "Mes candidatures Eiffel",
     "stages": [
-      { "id": "prepare", "label": "À préparer", "bg": "#EAF0F6", "fg": "#1C2B33", "role": "start", "empty": "Ajoute tes formations : trois priorités suffisent souvent." },
-      { "id": "echange", "label": "En échange", "bg": "#E3F1F7", "fg": "#245B72", "role": "contact" },
-      { "id": "depose", "label": "Déposée", "bg": "#fbeaca", "fg": "#7c5500", "role": "submitted" },
-      { "id": "preselec", "label": "Présélectionnée", "bg": "#DFF3E7", "fg": "#1F6B42", "role": "shortlisted" },
-      { "id": "porteur", "label": "Mon porteur", "bg": "#CFE3FF", "fg": "#0057C8", "role": "unique", "empty": "Une seule université peut te présenter à Campus France." },
-      { "id": "abandon", "label": "Abandonnée", "bg": "#E9EDF1", "fg": "#52626D", "role": "dropped" }
+      {
+        "id": "prepare",
+        "label": "À préparer",
+        "bg": "#EAF0F6",
+        "fg": "#1C2B33",
+        "role": "start",
+        "empty": "Ajoute tes formations : trois priorités suffisent souvent."
+      },
+      {
+        "id": "echange",
+        "label": "En échange",
+        "bg": "#E3F1F7",
+        "fg": "#245B72",
+        "role": "contact"
+      },
+      {
+        "id": "depose",
+        "label": "Déposée",
+        "bg": "#fbeaca",
+        "fg": "#7c5500",
+        "role": "submitted"
+      },
+      {
+        "id": "preselec",
+        "label": "Présélectionnée",
+        "bg": "#DFF3E7",
+        "fg": "#1F6B42",
+        "role": "shortlisted"
+      },
+      {
+        "id": "porteur",
+        "label": "Mon porteur",
+        "bg": "#CFE3FF",
+        "fg": "#0057C8",
+        "role": "unique",
+        "empty": "Une seule université peut te présenter à Campus France."
+      },
+      {
+        "id": "abandon",
+        "label": "Abandonnée",
+        "bg": "#E9EDF1",
+        "fg": "#52626D",
+        "role": "dropped"
+      }
     ],
-    "tiers": [{ "id": "prio", "label": "Priorité" }, { "id": "opt", "label": "Option" }, { "id": "res", "label": "Réserve" }],
+    "tiers": [
+      {
+        "id": "prio",
+        "label": "Priorité"
+      },
+      {
+        "id": "opt",
+        "label": "Option"
+      },
+      {
+        "id": "res",
+        "label": "Réserve"
+      }
+    ],
     "stepKinds": [
-      { "id": "contact", "label": "Contact", "lane": "courriels" },
-      { "id": "depot", "label": "Dépôt", "lane": "depots" },
-      { "id": "rep", "label": "Réponse", "lane": "reponses" }
+      {
+        "id": "contact",
+        "label": "Contact",
+        "lane": "courriels"
+      },
+      {
+        "id": "depot",
+        "label": "Dépôt",
+        "lane": "depots"
+      },
+      {
+        "id": "rep",
+        "label": "Réponse",
+        "lane": "reponses"
+      }
     ],
-    "views": ["canvas", "cal", "board", "docs", "mail"],
+    "views": [
+      "canvas",
+      "cal",
+      "board",
+      "docs",
+      "mail"
+    ],
     "milestones": [
-      { "id": "nat", "label": "Dépôt Campus France", "sub": "Par ton université porteuse", "date": "2027-01-06", "kind": "gate" },
-      { "id": "res", "label": "Résultats Eiffel", "sub": "Publication par Campus France", "date": "2027-04-12", "kind": "result" }
+      {
+        "id": "nat",
+        "label": "Dépôt Campus France",
+        "sub": "Par ton université porteuse",
+        "date": "2027-01-06",
+        "kind": "gate"
+      },
+      {
+        "id": "res",
+        "label": "Résultats Eiffel",
+        "sub": "Publication par Campus France",
+        "date": "2027-04-12",
+        "kind": "result"
+      }
     ],
     "gate": {
       "label": "Mon porteur unique",
       "dialog": "Ton université dépose ton dossier sur la plateforme de Campus France avant le 6 janvier 2027. Choisis-la ici quand une présélection est confirmée, puis retire les autres candidatures par écrit.",
       "uniqueRule": "Un candidat présenté par deux établissements est rejeté par Campus France."
     },
-    "tracks": [{ "id": "eef", "label": "Études en France", "sub": "Admission, procédure séparée" }],
+    "tracks": [
+      {
+        "id": "eef",
+        "label": "Études en France",
+        "sub": "Admission, procédure séparée"
+      }
+    ],
     "piecesTarget": "2026-11-15",
     "folders": [
-      { "id": "essentiel", "label": "À lire d'abord", "tone": "hot", "note": "" },
-      { "id": "identite", "label": "Identité et diplômes", "tone": "", "note": "" },
-      { "id": "releves", "label": "Relevés de notes", "tone": "", "note": "" },
-      { "id": "recos", "label": "Recommandations", "tone": "", "note": "Une lettre par formation, signée par la personne qui recommande. Ne signe jamais à sa place." },
-      { "id": "preuves", "label": "Preuves de réalisations", "tone": "", "note": "" },
-      { "id": "stages", "label": "Stages et emplois", "tone": "", "note": "" },
-      { "id": "archives", "label": "Anciennes pièces", "tone": "warn", "note": "Pièces à ne pas réutiliser telles quelles : mauvaise formation, fait inexact, date dépassée." }
+      {
+        "id": "essentiel",
+        "label": "À lire d'abord",
+        "tone": "hot",
+        "note": ""
+      },
+      {
+        "id": "identite",
+        "label": "Identité et diplômes",
+        "tone": "",
+        "note": ""
+      },
+      {
+        "id": "releves",
+        "label": "Relevés de notes",
+        "tone": "",
+        "note": ""
+      },
+      {
+        "id": "recos",
+        "label": "Recommandations",
+        "tone": "",
+        "note": "Une lettre par formation, signée par la personne qui recommande. Ne signe jamais à sa place."
+      },
+      {
+        "id": "preuves",
+        "label": "Preuves de réalisations",
+        "tone": "",
+        "note": ""
+      },
+      {
+        "id": "stages",
+        "label": "Stages et emplois",
+        "tone": "",
+        "note": ""
+      },
+      {
+        "id": "archives",
+        "label": "Anciennes pièces",
+        "tone": "warn",
+        "note": "Pièces à ne pas réutiliser telles quelles : mauvaise formation, fait inexact, date dépassée."
+      }
     ],
     "canvasTip": "Chaque ligne est une formation. Tous les fils convergent vers ton porteur unique, la seule université qui dépose ton dossier Eiffel. Coche un nœud quand l'étape est faite."
   },
   "tasks": [
     {
-      "label": "Choisir trois formations prioritaires", "dueDate": "2026-11-05",
-      "how": { "t": "Choisir trois formations prioritaires", "why": "Chaque université présélectionne en interne puis ne présente qu'un nombre limité de candidats. Mieux vaut trois dossiers soignés que dix dossiers génériques.", "how": ["Pour chaque formation, note la date limite interne de l'université (elle tombe souvent en novembre).", "Vérifie les conditions : certificat de langue, rang, soutien du responsable.", "Ajoute chaque formation avec le bouton « Candidature » du canvas."], "use": [["url", "Page officielle de la bourse", "https://www.campusfrance.org/fr/le-programme-de-bourses-d-excellence-eiffel"]] }
+      "label": "Choisir trois formations prioritaires",
+      "dueDate": "2026-11-05",
+      "how": {
+        "t": "Choisir trois formations prioritaires",
+        "why": "Chaque université présélectionne en interne puis ne présente qu'un nombre limité de candidats. Mieux vaut trois dossiers soignés que dix dossiers génériques.",
+        "how": [
+          "Pour chaque formation, note la date limite interne de l'université (elle tombe souvent en novembre).",
+          "Vérifie les conditions : certificat de langue, rang, soutien du responsable.",
+          "Ajoute chaque formation avec le bouton « Candidature » du canvas."
+        ],
+        "use": [
+          [
+            "url",
+            "Page officielle de la bourse",
+            "https://www.campusfrance.org/fr/le-programme-de-bourses-d-excellence-eiffel"
+          ]
+        ]
+      }
     },
     {
-      "label": "Écrire ton projet d'études", "dueDate": "2026-11-08",
-      "how": { "t": "Écrire ton projet d'études", "why": "C'est la pièce la plus lue : elle relie ton parcours, la formation visée et ton projet professionnel.", "how": ["Une version par formation, qui cite ses cours et ses laboratoires.", "Des faits vérifiables plutôt que des adjectifs.", "Range chaque version dans le dossier de la formation, avec la nature « Projet d'études »."], "use": [] }
+      "label": "Écrire ton projet d'études",
+      "dueDate": "2026-11-08",
+      "how": {
+        "t": "Écrire ton projet d'études",
+        "why": "C'est la pièce la plus lue : elle relie ton parcours, la formation visée et ton projet professionnel.",
+        "how": [
+          "Une version par formation, qui cite ses cours et ses laboratoires.",
+          "Des faits vérifiables plutôt que des adjectifs.",
+          "Range chaque version dans le dossier de la formation, avec la nature « Projet d'études »."
+        ],
+        "use": []
+      }
     },
     {
-      "label": "Demander les recommandations", "dueDate": "2026-11-06",
-      "how": { "t": "Demander les recommandations", "why": "Les universités demandent en général une ou deux lettres, adaptées à la formation visée.", "how": ["Écris à chaque personne avec la liste des formations et les dates.", "Joins ton CV et ton projet d'études pour l'aider.", "La personne relit, signe et date elle-même chaque lettre."], "use": [["piecesgo", "Ouvrir Pièces à réunir", ""]] }
+      "label": "Demander les recommandations",
+      "dueDate": "2026-11-06",
+      "how": {
+        "t": "Demander les recommandations",
+        "why": "Les universités demandent en général une ou deux lettres, adaptées à la formation visée.",
+        "how": [
+          "Écris à chaque personne avec la liste des formations et les dates.",
+          "Joins ton CV et ton projet d'études pour l'aider.",
+          "La personne relit, signe et date elle-même chaque lettre."
+        ],
+        "use": [
+          [
+            "piecesgo",
+            "Ouvrir Pièces à réunir",
+            ""
+          ]
+        ]
+      }
     },
     {
-      "label": "Signer la charte d'engagement Eiffel", "dueDate": "2026-11-07",
-      "how": { "t": "Signer la charte d'engagement Eiffel", "why": "Campus France l'exige dans chaque dossier. Ton université te la demandera.", "how": ["Télécharge le PDF avec le bouton.", "Remplis-le, signe-le, puis enregistre-le en PDF.", "Dans Pièces à réunir, ajoute-le à la carte « Charte d'engagement signée »."], "use": [["url", "Télécharger la charte", "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"], ["piecesgo", "Ouvrir Pièces à réunir", ""]] }
+      "label": "Signer la charte d'engagement Eiffel",
+      "dueDate": "2026-11-07",
+      "how": {
+        "t": "Signer la charte d'engagement Eiffel",
+        "why": "Campus France l'exige dans chaque dossier. Ton université te la demandera.",
+        "how": [
+          "Télécharge le PDF avec le bouton.",
+          "Remplis-le, signe-le, puis enregistre-le en PDF.",
+          "Dans Pièces à réunir, ajoute-le à la carte « Charte d'engagement signée »."
+        ],
+        "use": [
+          [
+            "url",
+            "Télécharger la charte",
+            "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"
+          ],
+          [
+            "piecesgo",
+            "Ouvrir Pièces à réunir",
+            ""
+          ]
+        ]
+      }
     },
     {
-      "label": "Payer les frais d'Études en France", "dueDate": "2026-11-15", "track": "eef",
-      "how": { "t": "Payer les frais d'Études en France", "why": "Études en France sert à ton admission. C'est une procédure séparée de la présélection Eiffel. Les dates changent selon le pays : vérifie celles de ton espace Campus France.", "how": ["Ouvre le calendrier de l'Espace Campus France de ton pays.", "Paye les frais avant la date indiquée et garde le reçu.", "Coche ce nœud."], "use": [["url", "Trouver l'Espace Campus France de mon pays", "https://www.campusfrance.org/fr"]] }
+      "label": "Payer les frais d'Études en France",
+      "dueDate": "2026-11-15",
+      "track": "eef",
+      "how": {
+        "t": "Payer les frais d'Études en France",
+        "why": "Études en France sert à ton admission. C'est une procédure séparée de la présélection Eiffel. Les dates changent selon le pays : vérifie celles de ton espace Campus France.",
+        "how": [
+          "Ouvre le calendrier de l'Espace Campus France de ton pays.",
+          "Paye les frais avant la date indiquée et garde le reçu.",
+          "Coche ce nœud."
+        ],
+        "use": [
+          [
+            "url",
+            "Trouver l'Espace Campus France de mon pays",
+            "https://www.campusfrance.org/fr"
+          ]
+        ]
+      }
     },
     {
-      "label": "Première soumission Études en France", "dueDate": "2026-11-20", "track": "eef",
-      "how": { "t": "Soumettre une première fois ton dossier Études en France", "why": "Une première soumission permet à Campus France de te demander des corrections à temps.", "how": ["Connecte-toi à ton espace Études en France.", "Ajoute les formations que tu vises, avec ton CV et ta lettre.", "Soumets ton dossier, puis coche ce nœud."], "use": [] }
+      "label": "Première soumission Études en France",
+      "dueDate": "2026-11-20",
+      "track": "eef",
+      "how": {
+        "t": "Soumettre une première fois ton dossier Études en France",
+        "why": "Une première soumission permet à Campus France de te demander des corrections à temps.",
+        "how": [
+          "Connecte-toi à ton espace Études en France.",
+          "Ajoute les formations que tu vises, avec ton CV et ta lettre.",
+          "Soumets ton dossier, puis coche ce nœud."
+        ],
+        "use": []
+      }
     },
     {
-      "label": "Dernière soumission Études en France", "dueDate": "2026-12-15", "track": "eef",
-      "how": { "t": "Soumettre la version corrigée", "why": "C'est la dernière date, après les corrections demandées par Campus France.", "how": ["Corrige ce que Campus France te signale.", "Soumets de nouveau avant la date, puis coche ce nœud."], "use": [] }
+      "label": "Dernière soumission Études en France",
+      "dueDate": "2026-12-15",
+      "track": "eef",
+      "how": {
+        "t": "Soumettre la version corrigée",
+        "why": "C'est la dernière date, après les corrections demandées par Campus France.",
+        "how": [
+          "Corrige ce que Campus France te signale.",
+          "Soumets de nouveau avant la date, puis coche ce nœud."
+        ],
+        "use": []
+      }
     },
     {
-      "label": "Entretien Campus France", "dueDate": "2027-03-15", "track": "eef",
-      "how": { "t": "Passer ton entretien Campus France", "why": "L'entretien pédagogique fait partie de la procédure Études en France.", "how": ["Attends ta convocation.", "Prépare une présentation de deux minutes : parcours, formation visée, projet.", "Coche ce nœud après l'entretien."], "use": [] }
+      "label": "Entretien Campus France",
+      "dueDate": "2027-03-15",
+      "track": "eef",
+      "how": {
+        "t": "Passer ton entretien Campus France",
+        "why": "L'entretien pédagogique fait partie de la procédure Études en France.",
+        "how": [
+          "Attends ta convocation.",
+          "Prépare une présentation de deux minutes : parcours, formation visée, projet.",
+          "Coche ce nœud après l'entretien."
+        ],
+        "use": []
+      }
     }
   ],
   "pieces": [
-    { "label": "Passeport", "who": "Toi", "note": "Valable pendant toute la durée des études." },
-    { "label": "Diplôme ou attestation de réussite", "who": "Ton école", "note": "Le dernier diplôme obtenu, ou une attestation si le diplôme n'est pas encore délivré." },
-    { "label": "Relevés de notes", "who": "Ton école", "note": "Toutes les années d'études supérieures." },
-    { "label": "CV", "who": "Toi", "note": "Deux pages au plus, avec des faits vérifiables." },
-    { "label": "Projet d'études", "who": "Toi", "note": "Une version par formation." },
-    { "label": "Lettres de recommandation", "who": "Tes enseignants ou employeurs", "note": "Signées par la personne qui recommande." },
     {
-      "label": "Charte d'engagement signée", "who": "Toi", "note": "À télécharger sur le site de Campus France.",
-      "how": { "t": "Signer la charte d'engagement Eiffel", "why": "Campus France l'exige dans chaque dossier.", "how": ["Télécharge le PDF.", "Remplis-le, signe-le, enregistre-le en PDF.", "Ajoute-le ici avec le bouton « Ajouter »."], "use": [["url", "Télécharger la charte", "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"]] }
+      "label": "Passeport",
+      "who": "Toi",
+      "note": "Valable pendant toute la durée des études."
     },
-    { "label": "Certificat de langue", "who": "Centre d'examen", "note": "Seulement si une formation le demande : vérifie formation par formation." },
-    { "label": "Preuves de réalisations", "who": "Toi", "note": "Prix, projets, publications : un lien ou un PDF pour chacun." }
+    {
+      "label": "Diplôme ou attestation de réussite",
+      "who": "Ton école",
+      "note": "Le dernier diplôme obtenu, ou une attestation si le diplôme n'est pas encore délivré."
+    },
+    {
+      "label": "Relevés de notes",
+      "who": "Ton école",
+      "note": "Toutes les années d'études supérieures."
+    },
+    {
+      "label": "CV",
+      "who": "Toi",
+      "note": "Deux pages au plus, avec des faits vérifiables."
+    },
+    {
+      "label": "Projet d'études",
+      "who": "Toi",
+      "note": "Une version par formation."
+    },
+    {
+      "label": "Lettres de recommandation",
+      "who": "Tes enseignants ou employeurs",
+      "note": "Signées par la personne qui recommande."
+    },
+    {
+      "label": "Charte d'engagement signée",
+      "who": "Toi",
+      "note": "À télécharger sur le site de Campus France.",
+      "how": {
+        "t": "Signer la charte d'engagement Eiffel",
+        "why": "Campus France l'exige dans chaque dossier.",
+        "how": [
+          "Télécharge le PDF.",
+          "Remplis-le, signe-le, enregistre-le en PDF.",
+          "Ajoute-le ici avec le bouton « Ajouter »."
+        ],
+        "use": [
+          [
+            "url",
+            "Télécharger la charte",
+            "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"
+          ]
+        ]
+      }
+    },
+    {
+      "label": "Certificat de langue",
+      "who": "Centre d'examen",
+      "note": "Seulement si une formation le demande : vérifie formation par formation."
+    },
+    {
+      "label": "Preuves de réalisations",
+      "who": "Toi",
+      "note": "Prix, projets, publications : un lien ou un PDF pour chacun."
+    }
+  ],
+  "applications": [
+    {
+      "key": "sorbonne-dac",
+      "university": "Sorbonne Université",
+      "program": "Master Informatique",
+      "longTitle": "Master Informatique, parcours DAC (Données, Apprentissage, Connaissances)",
+      "tier": "prio",
+      "variant": "IA et données",
+      "stage": "echange",
+      "conditions": "Dossier déposé via la plateforme de l'université. Rang de promotion attendu.",
+      "channel": "Plateforme de candidature",
+      "procedureUrl": "https://sciences.sorbonne-universite.fr",
+      "programUrl": "https://sciences.sorbonne-universite.fr",
+      "notes": "",
+      "formText": "",
+      "steps": [
+        {
+          "label": "Premier contact au responsable",
+          "kind": "contact",
+          "dueDate": "2026-11-10",
+          "isTarget": false,
+          "done": true
+        },
+        {
+          "label": "Déposer le dossier",
+          "kind": "depot",
+          "dueDate": "2026-11-28",
+          "isTarget": true,
+          "note": "Vise l'avant-veille.",
+          "how": {
+            "t": "Déposer le dossier sur la plateforme",
+            "why": "Un dossier complet et relu avant la date limite évite le rejet administratif.",
+            "how": [
+              "Rassemble les pièces listées dans « À réunir ».",
+              "Vérifie la nomination exacte de chaque fichier.",
+              "Garde la page de confirmation."
+            ],
+            "use": []
+          }
+        },
+        {
+          "label": "Réponse de l'université",
+          "kind": "rep",
+          "dueDate": "2026-12-12",
+          "isTarget": false
+        }
+      ]
+    },
+    {
+      "key": "grenoble-mosig",
+      "university": "Université Grenoble Alpes",
+      "program": "Master Informatique",
+      "longTitle": "Master of Science in Informatics at Grenoble (MoSIG)",
+      "tier": "prio",
+      "variant": "Recherche",
+      "stage": "depose",
+      "conditions": "Cursus enseigné en anglais : niveau d'anglais à justifier.",
+      "channel": "Plateforme de l'école doctorale",
+      "procedureUrl": "https://www.univ-grenoble-alpes.fr",
+      "programUrl": "https://www.univ-grenoble-alpes.fr",
+      "notes": "",
+      "formText": "",
+      "steps": [
+        {
+          "label": "Question sur l'anglais",
+          "kind": "contact",
+          "dueDate": "2026-11-06",
+          "isTarget": false,
+          "done": true
+        },
+        {
+          "label": "Dossier déposé",
+          "kind": "depot",
+          "dueDate": "2026-11-15",
+          "isTarget": true,
+          "done": true
+        },
+        {
+          "label": "Résultat d'admission",
+          "kind": "rep",
+          "dueDate": "2026-12-18",
+          "isTarget": false
+        }
+      ]
+    },
+    {
+      "key": "lille-ml",
+      "university": "Université de Lille",
+      "program": "Master Informatique",
+      "longTitle": "Master Informatique, parcours Machine Learning",
+      "tier": "opt",
+      "variant": "Apprentissage",
+      "stage": "prepare",
+      "conditions": "Relevés des trois dernières années exigés.",
+      "channel": "Courriel au secrétariat",
+      "procedureUrl": "https://www.univ-lille.fr",
+      "programUrl": "https://www.univ-lille.fr",
+      "notes": "",
+      "formText": "",
+      "steps": [
+        {
+          "label": "Écrire au secrétariat",
+          "kind": "contact",
+          "dueDate": "2026-11-18",
+          "isTarget": false
+        },
+        {
+          "label": "Déposer la candidature",
+          "kind": "depot",
+          "dueDate": "2026-12-05",
+          "isTarget": true
+        }
+      ]
+    },
+    {
+      "key": "bordeaux-info",
+      "university": "Université de Bordeaux",
+      "program": "Master Informatique",
+      "longTitle": "Master Informatique, parcours Génie Logiciel",
+      "tier": "opt",
+      "variant": "Logiciel",
+      "stage": "echange",
+      "conditions": "",
+      "channel": "Formulaire en ligne",
+      "procedureUrl": "https://www.u-bordeaux.fr",
+      "programUrl": "https://www.u-bordeaux.fr",
+      "notes": "",
+      "formText": "",
+      "steps": [
+        {
+          "label": "Premier contact",
+          "kind": "contact",
+          "dueDate": "2026-11-12",
+          "isTarget": false,
+          "done": true
+        },
+        {
+          "label": "Déposer le dossier",
+          "kind": "depot",
+          "dueDate": "2026-12-01",
+          "isTarget": true
+        }
+      ]
+    },
+    {
+      "key": "saclay-ia",
+      "university": "Université Paris-Saclay",
+      "program": "Master Intelligence Artificielle",
+      "longTitle": "Master Intelligence Artificielle (IA)",
+      "tier": "res",
+      "variant": "IA",
+      "stage": "preselec",
+      "conditions": "Forte sélectivité. Projet professionnel déterminant.",
+      "channel": "Plateforme de candidature",
+      "procedureUrl": "https://www.universite-paris-saclay.fr",
+      "programUrl": "https://www.universite-paris-saclay.fr",
+      "notes": "",
+      "formText": "",
+      "steps": [
+        {
+          "label": "Dossier déposé",
+          "kind": "depot",
+          "dueDate": "2026-11-20",
+          "isTarget": true,
+          "done": true
+        },
+        {
+          "label": "Entretien éventuel",
+          "kind": "rep",
+          "dueDate": "2026-12-10",
+          "isTarget": false
+        }
+      ]
+    }
+  ],
+  "threads": [
+    {
+      "key": "th-sorbonne",
+      "app": "sorbonne-dac",
+      "title": "Sorbonne — procédure et pièces",
+      "recipient": "secretariat.master@exemple.fr",
+      "subject": "Bourse Eiffel 2027 : candidature au Master Informatique, parcours DAC",
+      "body": "Madame, Monsieur,\n\nJe prépare une candidature à la bourse d'excellence Eiffel pour le Master Informatique, parcours DAC. Pourriez-vous me préciser les pièces attendues et la date limite de dépôt interne ?\n\nJe vous remercie par avance et vous prie d'agréer, Madame, Monsieur, mes salutations distinguées.",
+      "kind": "premier_contact",
+      "sentAt": "2026-11-05",
+      "messages": [
+        {
+          "direction": "in",
+          "rawText": "Bonjour,\n\nLe dossier se dépose sur notre plateforme avant le 28 novembre. Les pièces attendues sont le CV, les relevés de notes et un projet motivé. Bien cordialement.",
+          "receivedOn": "2026-11-07"
+        }
+      ]
+    },
+    {
+      "key": "th-grenoble",
+      "app": "grenoble-mosig",
+      "title": "Grenoble — niveau d'anglais",
+      "recipient": "admissions@exemple.fr",
+      "subject": "Bourse Eiffel 2027, MoSIG : justificatif de niveau d'anglais",
+      "body": "Madame, Monsieur,\n\nLe parcours MoSIG étant enseigné en anglais, pourriez-vous m'indiquer quel justificatif de niveau est accepté pour la candidature ?\n\nAvec mes remerciements, je vous prie d'agréer mes salutations distinguées.",
+      "kind": "question",
+      "sentAt": null,
+      "messages": []
+    },
+    {
+      "key": "th-lille",
+      "app": "lille-ml",
+      "title": "Lille — premier contact",
+      "recipient": "secretariat.info@exemple.fr",
+      "subject": "Bourse Eiffel 2027 : Master Informatique, parcours Machine Learning",
+      "body": "Madame, Monsieur,\n\nJe souhaite candidater au Master Machine Learning dans le cadre de la bourse Eiffel. Pourriez-vous me confirmer la procédure de dépôt pour un candidat international ?\n\nJe vous remercie et vous prie d'agréer mes salutations distinguées.",
+      "kind": "premier_contact",
+      "sentAt": null,
+      "messages": []
+    }
   ]
 }

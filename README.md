@@ -1,10 +1,36 @@
 # Parcours
 
-Parcours est un espace privé pour suivre des candidatures : universités, bourses, emplois. Chaque personne invitée se connecte et retrouve ses échéances, ses pièces, ses courriels et ses documents. Personne d'autre n'y a accès, pas même l'administrateur.
+**Un espace privé pour suivre ses candidatures — universités, bourses, emplois.** Chaque personne invitée se connecte et retrouve ses échéances, ses pièces, ses courriels et ses documents. Personne d'autre n'y a accès, pas même l'administrateur.
 
-Le code est ouvert sous licence MIT. Tu peux l'héberger pour toi et tes proches, l'adapter à ton parcours depuis l'application, ou le modifier avec Claude Code.
+[![CI](https://github.com/spyder20052/parcours/actions/workflows/ci.yml/badge.svg)](https://github.com/spyder20052/parcours/actions/workflows/ci.yml)
+[![Licence MIT](https://img.shields.io/badge/licence-MIT-2d7ff9.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-16-111.svg)](https://nextjs.org)
+[![PostgreSQL RLS](https://img.shields.io/badge/isolation-PostgreSQL%20RLS-2d7ff9.svg)](#sécurité)
+[![Accessibilité](https://img.shields.io/badge/accessibilité-clavier%20%7C%20ARIA%20%7C%20mouvement%20réduit-16a34a.svg)](#accessibilité)
 
-*English summary at the end of this file.*
+![Visite des cinq vues de Parcours : canvas, calendrier, tableau, échanges, documents](docs/vitrine/tour.gif)
+
+Le code est ouvert sous licence MIT. Tu peux l'héberger pour toi et tes proches, l'adapter à ton parcours depuis l'application, ou le modifier avec Claude Code. *(English summary at the end of this file.)*
+
+> Toutes les captures ci-dessous proviennent d'un espace de démonstration peuplé du modèle « Bourse Eiffel 2027 ». Les universités citées sont des exemples publics ; aucune donnée personnelle n'est utilisée.
+
+## Aperçu
+
+### Canvas — chaque candidature est un fil posé sur le temps
+
+Les échéances passées remontent en haut, en rouge : l'application met en avant ce qui est en retard et propose « comment faire ».
+
+![Vue Canvas : les candidatures en fils sur une frise temporelle, avec le panneau des actions à faire](docs/vitrine/01-canvas-sombre.jpg)
+
+| Tableau à colonnes | Calendrier semaine et mois |
+|---|---|
+| ![Vue Tableau : candidatures réparties en colonnes À préparer, En échange, Déposée, Présélectionnée, Mon porteur](docs/vitrine/03-tableau-sombre.jpg) | ![Vue Calendrier : courriels, dépôts et réponses placés sur la semaine](docs/vitrine/02-calendrier-sombre.jpg) |
+| **Échanges — courriels et réponses** | **Documents et pièces à réunir** |
+| ![Vue Échanges : liste des courriels, un fil avec sa réponse reçue et sa chronologie](docs/vitrine/04-echanges-sombre.jpg) | ![Vue Documents : dossiers de pièces et checklist de ce qui manque](docs/vitrine/05-documents-sombre.jpg) |
+
+| Thème clair | Sur téléphone |
+|---|---|
+| ![Le même Canvas en thème clair](docs/vitrine/06-canvas-clair.jpg) | <img src="docs/vitrine/07-mobile-sombre.jpg" alt="Parcours sur mobile : la frise des candidatures et la barre de navigation en bas" width="300"> |
 
 ## Ce que fait l'application
 
@@ -21,16 +47,32 @@ Le code est ouvert sous licence MIT. Tu peux l'héberger pour toi et tes proches
 
 ## Sécurité
 
+La sécurité est une défense en profondeur : même si une couche est contournée, les autres tiennent.
+
 | Sujet | Mesure |
 |---|---|
-| Cloisonnement | RLS PostgreSQL forcé sur toutes les tables métier. Chaque requête passe par `withUser()`, qui fixe l'utilisateur dans la transaction. Une requête oubliée renvoie zéro ligne, jamais les données d'un autre compte. |
-| Comptes | Inscription sur invitation uniquement. Connexion par lien e-mail (10 minutes, usage unique, jeton haché) ou par Google. Sessions par cookie `HttpOnly`, `Secure`, `SameSite=Lax`. |
-| Fichiers | Stockage privé compatible S3 (Cloudflare R2 en production). Envoi et lecture par URL signées de 5 minutes. La nature réelle du fichier est vérifiée par ses premiers octets. PDF, PNG, JPEG et WEBP seulement, 15 Mo au plus. |
-| Clés IA | Chiffrées en AES-256-GCM, liées à leur propriétaire. Jamais renvoyées au navigateur. |
-| Web | CSP avec nonce. Pas de mise en cadre. HSTS. Vérification de l'origine sur chaque écriture. Validation Zod de chaque entrée. Limitation de débit en base. |
-| Données | Export JSON complet. Suppression du compte et des fichiers. Journal d'audit sans adresse IP. |
+| Cloisonnement | RLS PostgreSQL **forcé** sur toutes les tables métier. Chaque requête passe par `withUser()`, qui fixe l'utilisateur dans la transaction. Une requête oubliée renvoie zéro ligne, jamais les données d'un autre compte. Le rôle applicatif ne peut pas contourner le RLS ; les migrations tournent avec un rôle distinct. |
+| Comptes | Inscription sur invitation uniquement. Connexion par lien e-mail (10 minutes, usage unique, jeton haché) ou par Google (PKCE). Sessions par cookie `HttpOnly`, `Secure`, `SameSite=Lax`, révocables. |
+| Fichiers | Stockage privé compatible S3 (Cloudflare R2 en production). Clés d'objet imprévisibles. Envoi et lecture par URL signées de 5 minutes. La nature réelle du fichier est vérifiée par ses premiers octets. PDF, PNG, JPEG et WEBP seulement, 15 Mo au plus. |
+| Clés et jetons | Clés de l'API Claude et jetons Outlook chiffrés en AES-256-GCM, liés à leur propriétaire. Jamais renvoyés au navigateur. Appels faits depuis le serveur uniquement. |
+| Web | CSP avec nonce, sans script en ligne. Pas de mise en cadre (`frame-ancestors 'none'`). HSTS. Vérification de l'origine sur chaque écriture. Validation Zod de chaque entrée. Limitation de débit en base. |
+| Assistant IA | Ne peut agir que par des opérations typées, validées et soumises au RLS. Le texte collé (réponses d'universités) est traité comme une donnée, jamais comme une instruction. Il ne peut pas envoyer de courriel. |
+| Données personnelles | Export JSON complet et des fichiers. Suppression du compte. Journal d'audit sans adresse IP en clair. |
+| Dépôt | Intégration continue, analyse CodeQL et Dependabot. Aucun secret ni donnée personnelle versionné : le dossier `private/` est ignoré par Git. |
 
-Détails et signalement d'une faille : [SECURITY.md](SECURITY.md).
+Modèle de menace, périmètre et signalement d'une faille : **[SECURITY.md](SECURITY.md)**.
+
+## Accessibilité
+
+L'interface vise le standard WCAG 2.1 AA et reste pilotable sans souris.
+
+- **Clavier.** Toute action a une cible focusable ; le focus est visible ; la recherche s'ouvre avec `/`. Les fenêtres gardent le focus à l'intérieur et se ferment avec `Échap`.
+- **Lecteurs d'écran.** Rôles et états ARIA sur les éléments interactifs (`aria-label`, `aria-pressed`, `aria-current`, `aria-checked`, `role="group"`, `"listbox"`, `"toolbar"`…). Les retours vivants (envois, erreurs) passent par `aria-live`. Des libellés réservés aux lecteurs d'écran complètent les icônes.
+- **Mouvement réduit.** `prefers-reduced-motion` est respecté : les animations sont coupées, l'information ne dépend jamais du mouvement.
+- **Contraste et thèmes.** Thèmes clair et sombre, couleurs calibrées pour le contraste, état jamais porté par la seule couleur (texte et forme en renfort).
+- **Lisibilité.** Mise en page responsive jusqu'au téléphone (testée à 390 px), zones tactiles confortables, textes qui ne se tronquent pas.
+
+Détails et méthode de vérification : **[docs/ACCESSIBILITE.md](docs/ACCESSIBILITE.md)**.
 
 ## Démarrer en local
 
@@ -109,10 +151,11 @@ MIT, voir [LICENSE](LICENSE). Les polices Gabarito et Onest sont distribuées so
 
 Parcours is a private, invitation-only tracker for applications (universities, scholarships, jobs).
 
-- **Views.** Five views over the same data: timeline canvas, calendar, board, documents with PDF previews, and email threads.
-- **Isolation.** Each user's data is isolated by forced PostgreSQL row-level security. Files live in a private S3-compatible bucket, served through 5-minute signed URLs.
+- **Views.** Five views over the same data: timeline canvas, calendar, board, documents with PDF previews, and email threads. See the screenshots above.
+- **Isolation.** Each user's data is isolated by forced PostgreSQL row-level security; the app role cannot bypass it. Files live in a private S3-compatible bucket, served through 5-minute signed URLs. Secrets and tokens are encrypted at rest (AES-256-GCM).
 - **Sign-in.** Magic link or Google, for invited addresses only.
-- **Optional assistant.** It uses the user's own Claude API key, encrypted at rest. It proposes typed operations that the user previews, applies and can undo.
+- **Accessibility.** Keyboard-operable with a visible focus ring, ARIA roles and live regions, `prefers-reduced-motion` honoured, light/dark themes, responsive down to phones. See [docs/ACCESSIBILITE.md](docs/ACCESSIBILITE.md).
+- **Optional assistant.** It uses the user's own Claude API key, encrypted at rest. It proposes typed operations that the user previews, applies and can undo; pasted text is treated as data, never instructions.
 - **Customization.** In the app (data and a validated JSON configuration), through the assistant, or in code with Claude Code (see `CLAUDE.md`).
 - **Local setup.** Run `npm install`, copy `.env.example` to `.env.local`, then run `npm run setup` and `npm run dev`.
-- **Deployment.** See `docs/DEPLOIEMENT.md`. License: MIT.
+- **Deployment & security.** See `docs/DEPLOIEMENT.md` and `SECURITY.md`. License: MIT.
