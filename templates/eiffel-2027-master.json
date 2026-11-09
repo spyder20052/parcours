@@ -167,7 +167,7 @@
   "tasks": [
     {
       "label": "Choisir trois formations prioritaires",
-      "dueDate": "2026-11-05",
+      "dueDate": "2026-11-19",
       "how": {
         "t": "Choisir trois formations prioritaires",
         "why": "Chaque université présélectionne en interne puis ne présente qu'un nombre limité de candidats. Mieux vaut trois dossiers soignés que dix dossiers génériques.",
@@ -187,7 +187,7 @@
     },
     {
       "label": "Écrire ton projet d'études",
-      "dueDate": "2026-11-08",
+      "dueDate": "2026-11-22",
       "how": {
         "t": "Écrire ton projet d'études",
         "why": "C'est la pièce la plus lue : elle relie ton parcours, la formation visée et ton projet professionnel.",
@@ -201,7 +201,7 @@
     },
     {
       "label": "Demander les recommandations",
-      "dueDate": "2026-11-06",
+      "dueDate": "2026-11-20",
       "how": {
         "t": "Demander les recommandations",
         "why": "Les universités demandent en général une ou deux lettres, adaptées à la formation visée.",
@@ -221,7 +221,7 @@
     },
     {
       "label": "Signer la charte d'engagement Eiffel",
-      "dueDate": "2026-11-07",
+      "dueDate": "2026-11-21",
       "how": {
         "t": "Signer la charte d'engagement Eiffel",
         "why": "Campus France l'exige dans chaque dossier. Ton université te la demandera.",
