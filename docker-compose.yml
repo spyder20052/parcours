@@ -1,0 +1,26 @@
+# Environnement local : PostgreSQL (remplace Neon) et SeaweedFS en mode S3 (remplace Cloudflare R2).
+services:
+  db:
+    image: postgres:17.6
+    environment:
+      POSTGRES_USER: parcours_owner
+      POSTGRES_PASSWORD: parcours_local
+      POSTGRES_DB: parcours
+    ports: ["5433:5432"]
+    volumes: ["db-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parcours_owner -d parcours"]
+      interval: 2s
+      retries: 30
+
+  storage:
+    image: chrislusf/seaweedfs:4.40
+    command: server -s3 -s3.config=/etc/seaweedfs/s3.json -dir=/data -master.volumeSizeLimitMB=64
+    ports: ["8333:8333"]
+    volumes:
+      - storage-data:/data
+      - ./docker/s3.json:/etc/seaweedfs/s3.json:ro
+
+volumes:
+  db-data:
+  storage-data:

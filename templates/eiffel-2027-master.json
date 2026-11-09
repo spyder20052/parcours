@@ -1,0 +1,93 @@
+{
+  "id": "eiffel-2027-master",
+  "name": "Bourse Eiffel 2027, niveau master",
+  "description": "Le parcours de la bourse France Excellence Eiffel : présélection par chaque université, un seul porteur, Études en France en parallèle. Pièces, tâches et modes d'emploi déjà prêts. Tu ajoutes tes formations.",
+  "config": {
+    "version": 1,
+    "appTitle": "Mes candidatures Eiffel",
+    "stages": [
+      { "id": "prepare", "label": "À préparer", "bg": "#EAF0F6", "fg": "#1C2B33", "role": "start", "empty": "Ajoute tes formations : trois priorités suffisent souvent." },
+      { "id": "echange", "label": "En échange", "bg": "#E3F1F7", "fg": "#245B72", "role": "contact" },
+      { "id": "depose", "label": "Déposée", "bg": "#fbeaca", "fg": "#7c5500", "role": "submitted" },
+      { "id": "preselec", "label": "Présélectionnée", "bg": "#DFF3E7", "fg": "#1F6B42", "role": "shortlisted" },
+      { "id": "porteur", "label": "Mon porteur", "bg": "#CFE3FF", "fg": "#0057C8", "role": "unique", "empty": "Une seule université peut te présenter à Campus France." },
+      { "id": "abandon", "label": "Abandonnée", "bg": "#E9EDF1", "fg": "#52626D", "role": "dropped" }
+    ],
+    "tiers": [{ "id": "prio", "label": "Priorité" }, { "id": "opt", "label": "Option" }, { "id": "res", "label": "Réserve" }],
+    "stepKinds": [
+      { "id": "contact", "label": "Contact", "lane": "courriels" },
+      { "id": "depot", "label": "Dépôt", "lane": "depots" },
+      { "id": "rep", "label": "Réponse", "lane": "reponses" }
+    ],
+    "views": ["canvas", "cal", "board", "docs", "mail"],
+    "milestones": [
+      { "id": "nat", "label": "Dépôt Campus France", "sub": "Par ton université porteuse", "date": "2027-01-06", "kind": "gate" },
+      { "id": "res", "label": "Résultats Eiffel", "sub": "Publication par Campus France", "date": "2027-04-12", "kind": "result" }
+    ],
+    "gate": {
+      "label": "Mon porteur unique",
+      "dialog": "Ton université dépose ton dossier sur la plateforme de Campus France avant le 6 janvier 2027. Choisis-la ici quand une présélection est confirmée, puis retire les autres candidatures par écrit.",
+      "uniqueRule": "Un candidat présenté par deux établissements est rejeté par Campus France."
+    },
+    "tracks": [{ "id": "eef", "label": "Études en France", "sub": "Admission, procédure séparée" }],
+    "piecesTarget": "2026-11-15",
+    "folders": [
+      { "id": "essentiel", "label": "À lire d'abord", "tone": "hot", "note": "" },
+      { "id": "identite", "label": "Identité et diplômes", "tone": "", "note": "" },
+      { "id": "releves", "label": "Relevés de notes", "tone": "", "note": "" },
+      { "id": "recos", "label": "Recommandations", "tone": "", "note": "Une lettre par formation, signée par la personne qui recommande. Ne signe jamais à sa place." },
+      { "id": "preuves", "label": "Preuves de réalisations", "tone": "", "note": "" },
+      { "id": "stages", "label": "Stages et emplois", "tone": "", "note": "" },
+      { "id": "archives", "label": "Anciennes pièces", "tone": "warn", "note": "Pièces à ne pas réutiliser telles quelles : mauvaise formation, fait inexact, date dépassée." }
+    ],
+    "canvasTip": "Chaque ligne est une formation. Tous les fils convergent vers ton porteur unique, la seule université qui dépose ton dossier Eiffel. Coche un nœud quand l'étape est faite."
+  },
+  "tasks": [
+    {
+      "label": "Choisir trois formations prioritaires", "dueDate": "2026-11-05",
+      "how": { "t": "Choisir trois formations prioritaires", "why": "Chaque université présélectionne en interne puis ne présente qu'un nombre limité de candidats. Mieux vaut trois dossiers soignés que dix dossiers génériques.", "how": ["Pour chaque formation, note la date limite interne de l'université (elle tombe souvent en novembre).", "Vérifie les conditions : certificat de langue, rang, soutien du responsable.", "Ajoute chaque formation avec le bouton « Candidature » du canvas."], "use": [["url", "Page officielle de la bourse", "https://www.campusfrance.org/fr/le-programme-de-bourses-d-excellence-eiffel"]] }
+    },
+    {
+      "label": "Écrire ton projet d'études", "dueDate": "2026-11-08",
+      "how": { "t": "Écrire ton projet d'études", "why": "C'est la pièce la plus lue : elle relie ton parcours, la formation visée et ton projet professionnel.", "how": ["Une version par formation, qui cite ses cours et ses laboratoires.", "Des faits vérifiables plutôt que des adjectifs.", "Range chaque version dans le dossier de la formation, avec la nature « Projet d'études »."], "use": [] }
+    },
+    {
+      "label": "Demander les recommandations", "dueDate": "2026-11-06",
+      "how": { "t": "Demander les recommandations", "why": "Les universités demandent en général une ou deux lettres, adaptées à la formation visée.", "how": ["Écris à chaque personne avec la liste des formations et les dates.", "Joins ton CV et ton projet d'études pour l'aider.", "La personne relit, signe et date elle-même chaque lettre."], "use": [["piecesgo", "Ouvrir Pièces à réunir", ""]] }
+    },
+    {
+      "label": "Signer la charte d'engagement Eiffel", "dueDate": "2026-11-07",
+      "how": { "t": "Signer la charte d'engagement Eiffel", "why": "Campus France l'exige dans chaque dossier. Ton université te la demandera.", "how": ["Télécharge le PDF avec le bouton.", "Remplis-le, signe-le, puis enregistre-le en PDF.", "Dans Pièces à réunir, ajoute-le à la carte « Charte d'engagement signée »."], "use": [["url", "Télécharger la charte", "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"], ["piecesgo", "Ouvrir Pièces à réunir", ""]] }
+    },
+    {
+      "label": "Payer les frais d'Études en France", "dueDate": "2026-11-15", "track": "eef",
+      "how": { "t": "Payer les frais d'Études en France", "why": "Études en France sert à ton admission. C'est une procédure séparée de la présélection Eiffel. Les dates changent selon le pays : vérifie celles de ton espace Campus France.", "how": ["Ouvre le calendrier de l'Espace Campus France de ton pays.", "Paye les frais avant la date indiquée et garde le reçu.", "Coche ce nœud."], "use": [["url", "Trouver l'Espace Campus France de mon pays", "https://www.campusfrance.org/fr"]] }
+    },
+    {
+      "label": "Première soumission Études en France", "dueDate": "2026-11-20", "track": "eef",
+      "how": { "t": "Soumettre une première fois ton dossier Études en France", "why": "Une première soumission permet à Campus France de te demander des corrections à temps.", "how": ["Connecte-toi à ton espace Études en France.", "Ajoute les formations que tu vises, avec ton CV et ta lettre.", "Soumets ton dossier, puis coche ce nœud."], "use": [] }
+    },
+    {
+      "label": "Dernière soumission Études en France", "dueDate": "2026-12-15", "track": "eef",
+      "how": { "t": "Soumettre la version corrigée", "why": "C'est la dernière date, après les corrections demandées par Campus France.", "how": ["Corrige ce que Campus France te signale.", "Soumets de nouveau avant la date, puis coche ce nœud."], "use": [] }
+    },
+    {
+      "label": "Entretien Campus France", "dueDate": "2027-03-15", "track": "eef",
+      "how": { "t": "Passer ton entretien Campus France", "why": "L'entretien pédagogique fait partie de la procédure Études en France.", "how": ["Attends ta convocation.", "Prépare une présentation de deux minutes : parcours, formation visée, projet.", "Coche ce nœud après l'entretien."], "use": [] }
+    }
+  ],
+  "pieces": [
+    { "label": "Passeport", "who": "Toi", "note": "Valable pendant toute la durée des études." },
+    { "label": "Diplôme ou attestation de réussite", "who": "Ton école", "note": "Le dernier diplôme obtenu, ou une attestation si le diplôme n'est pas encore délivré." },
+    { "label": "Relevés de notes", "who": "Ton école", "note": "Toutes les années d'études supérieures." },
+    { "label": "CV", "who": "Toi", "note": "Deux pages au plus, avec des faits vérifiables." },
+    { "label": "Projet d'études", "who": "Toi", "note": "Une version par formation." },
+    { "label": "Lettres de recommandation", "who": "Tes enseignants ou employeurs", "note": "Signées par la personne qui recommande." },
+    {
+      "label": "Charte d'engagement signée", "who": "Toi", "note": "À télécharger sur le site de Campus France.",
+      "how": { "t": "Signer la charte d'engagement Eiffel", "why": "Campus France l'exige dans chaque dossier.", "how": ["Télécharge le PDF.", "Remplis-le, signe-le, enregistre-le en PDF.", "Ajoute-le ici avec le bouton « Ajouter »."], "use": [["url", "Télécharger la charte", "https://www.campusfrance.org/system/files/medias/documents/2026-10/Engagement_boursier_eiffel_2027.pdf"]] }
+    },
+    { "label": "Certificat de langue", "who": "Centre d'examen", "note": "Seulement si une formation le demande : vérifie formation par formation." },
+    { "label": "Preuves de réalisations", "who": "Toi", "note": "Prix, projets, publications : un lien ou un PDF pour chacun." }
+  ]
+}

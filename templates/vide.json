@@ -1,0 +1,31 @@
+{
+  "id": "vide",
+  "name": "Parcours vide",
+  "description": "Un espace neutre : cinq colonnes, aucune candidature. Tu construis ton propre parcours, à la main ou avec l'assistant.",
+  "config": {
+    "version": 1,
+    "appTitle": "Mes candidatures",
+    "stages": [
+      { "id": "prepare", "label": "À préparer", "bg": "#EAF0F6", "fg": "#1C2B33", "role": "start", "empty": "Ajoute une candidature pour commencer." },
+      { "id": "echange", "label": "En échange", "bg": "#E3F1F7", "fg": "#245B72", "role": "contact" },
+      { "id": "depose", "label": "Déposée", "bg": "#fbeaca", "fg": "#7c5500", "role": "submitted" },
+      { "id": "retenue", "label": "Retenue", "bg": "#DFF3E7", "fg": "#1F6B42", "role": "shortlisted" },
+      { "id": "abandon", "label": "Abandonnée", "bg": "#E9EDF1", "fg": "#52626D", "role": "dropped" }
+    ],
+    "tiers": [{ "id": "prio", "label": "Priorité" }, { "id": "opt", "label": "Option" }],
+    "stepKinds": [
+      { "id": "contact", "label": "Contact", "lane": "courriels" },
+      { "id": "depot", "label": "Dépôt", "lane": "depots" },
+      { "id": "rep", "label": "Réponse", "lane": "reponses" }
+    ],
+    "views": ["canvas", "cal", "board", "docs", "mail"],
+    "milestones": [],
+    "tracks": [],
+    "folders": [
+      { "id": "identite", "label": "Identité", "tone": "", "note": "" },
+      { "id": "diplomes", "label": "Diplômes et relevés", "tone": "", "note": "" },
+      { "id": "lettres", "label": "Lettres et CV", "tone": "hot", "note": "" }
+    ],
+    "canvasTip": "Chaque ligne est une candidature posée sur le temps. Ajoute la première avec le bouton « Candidature »."
+  }
+}

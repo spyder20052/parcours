@@ -1,0 +1,9 @@
+{
+  "identities": [
+    {
+      "name": "parcours",
+      "credentials": [{ "accessKey": "parcours", "secretKey": "parcours_local_secret" }],
+      "actions": ["Admin", "Read", "Write", "List", "Tagging"]
+    }
+  ]
+}

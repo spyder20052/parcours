@@ -1,0 +1,33 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:17.6
+        env: { POSTGRES_USER: parcours_owner, POSTGRES_PASSWORD: parcours_local, POSTGRES_DB: parcours }
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U parcours_owner" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgres://parcours_owner:parcours_local@localhost:5433/parcours
+      APP_URL: http://localhost:3000
+      BETTER_AUTH_SECRET: ci-secret-ci-secret-ci-secret-ci-secret
+      APP_ENCRYPTION_KEY: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      ADMIN_EMAIL: admin@parcours.test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - run: cp .env.example .env.local
+      - run: node --import tsx scripts/migrate.ts
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
