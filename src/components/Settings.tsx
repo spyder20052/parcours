@@ -13,6 +13,9 @@ const OUTLOOK_BACK: Record<string, { ok: boolean; t: string }> = {
   erreur: { ok: false, t: "La connexion à Outlook a échoué. Réessaie ; si cela recommence, ton établissement bloque peut-être les applications externes." },
 };
 
+// Rechargement complet volontaire après déconnexion ou suppression de l'espace / du compte : on repart d'un état propre, pas d'une navigation douce.
+const hardReload = (to: string) => { location.href = to; };
+
 async function call(path: string, method: string, body?: unknown) {
   const r = await fetch(path, { method, headers: body ? { "content-type": "application/json" } : undefined, body: body ? JSON.stringify(body) : undefined });
   const j = await r.json().catch(() => ({}));
@@ -75,7 +78,7 @@ export default function Settings({ me, config, ai, mail, outlookResult }: { me: 
           <form className="set-row" onSubmit={(e) => { e.preventDefault(); prof.run(async () => { await call("/api/account", "PATCH", { name }); return "Nom enregistré."; }); }}>
             <div style={{ flex: 1, minWidth: 200 }}><label className="fld" htmlFor="nm">Nom affiché</label><input className="inp" id="nm" value={name} maxLength={80} required onChange={(e) => setName(e.target.value)} /></div>
             <button className="btn lime" disabled={prof.busy}>Enregistrer</button>
-            <button type="button" className="btn" onClick={async () => { await authClient.signOut(); location.href = "/connexion"; }}>Me déconnecter</button>
+            <button type="button" className="btn" onClick={async () => { await authClient.signOut(); hardReload("/connexion"); }}>Me déconnecter</button>
           </form>
           {prof.out}
         </section>
@@ -138,7 +141,7 @@ export default function Settings({ me, config, ai, mail, outlookResult }: { me: 
           {config !== null && (
             <>
               <p className="meta" style={{ marginTop: 14 }}><b>Repartir de zéro.</b> Supprime ton espace, ses candidatures et ses fichiers, puis te propose de choisir un nouveau modèle. Ton compte reste. Tape EFFACER pour confirmer.</p>
-              <form className="set-row" onSubmit={(e) => { e.preventDefault(); resetA.run(async () => { await call("/api/workspace", "DELETE", { confirm: confirmReset }); location.href = "/"; }); }}>
+              <form className="set-row" onSubmit={(e) => { e.preventDefault(); resetA.run(async () => { await call("/api/workspace", "DELETE", { confirm: confirmReset }); hardReload("/"); }); }}>
                 <input className="inp" aria-label="Confirmation" value={confirmReset} onChange={(e) => setConfirmReset(e.target.value)} placeholder="EFFACER" />
                 <button className="btn" disabled={resetA.busy || confirmReset !== "EFFACER"}>Effacer mon espace</button>
               </form>
@@ -146,7 +149,7 @@ export default function Settings({ me, config, ai, mail, outlookResult }: { me: 
             </>
           )}
           <p className="meta" style={{ marginTop: 14 }}><b>Supprimer mon compte.</b> Tout est effacé définitivement : compte, espace, fichiers, clé IA. Recopie ton adresse e-mail pour confirmer.</p>
-          <form className="set-row" onSubmit={(e) => { e.preventDefault(); delA.run(async () => { await call("/api/account", "DELETE", { confirm: confirmDel }); location.href = "/connexion"; }); }}>
+          <form className="set-row" onSubmit={(e) => { e.preventDefault(); delA.run(async () => { await call("/api/account", "DELETE", { confirm: confirmDel }); hardReload("/connexion"); }); }}>
             <input className="inp" aria-label="Adresse e-mail de confirmation" value={confirmDel} onChange={(e) => setConfirmDel(e.target.value)} placeholder={me.email} />
             <button className="btn" disabled={delA.busy || confirmDel.trim().toLowerCase() !== me.email.toLowerCase()}>Supprimer définitivement</button>
           </form>
